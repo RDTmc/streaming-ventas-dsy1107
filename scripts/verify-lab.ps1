@@ -100,7 +100,7 @@ Check "JMX producer 9406" ((HttpCode $App "http://10.10.0.25:9406/metrics") -eq 
 Check "JMX streams 9407" ((HttpCode $App "http://10.10.0.25:9407/metrics") -eq "200")
 $events = Remote $App "docker logs --since 60s ventas-app-producer-1 2>&1 | grep -c eventId"
 Check "producer emitiendo (60 s)" ([int]$events -gt 0) "($events eventos)"
-$running = Remote $App "docker logs --since 30m ventas-app-consumer-1 2>&1 | grep 'State transition' | tail -n 1"
+$running = Remote $App "docker logs --tail=4000 ventas-app-consumer-1 2>&1 | grep 'State transition' | tail -n 1"
 Check "Streams en RUNNING" ($running -match "to RUNNING")
 
 # ---------------------------------------------------------------- Monitoring

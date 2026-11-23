@@ -1,0 +1,169 @@
+== topics describe ==
+Topic: ventas-aggregator-eventos-procesados-changelog	TopicId: 3N84oMJ7SDiIE9gFK9QDsA	PartitionCount: 4	ReplicationFactor: 2	Configs: min.insync.replicas=1,cleanup.policy=compact,message.timestamp.type=CreateTime
+	Topic: ventas-aggregator-eventos-procesados-changelog	Partition: 0	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: ventas-aggregator-eventos-procesados-changelog	Partition: 1	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: ventas-aggregator-eventos-procesados-changelog	Partition: 2	Leader: 1	Replicas: 1,2	Isr: 1
+--
+Topic: ventas-agregadas	TopicId: TaD2wT6wRNqvJW7YNKEKog	PartitionCount: 2	ReplicationFactor: 2	Configs: min.insync.replicas=1
+	Topic: ventas-agregadas	Partition: 0	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: ventas-agregadas	Partition: 1	Leader: 1	Replicas: 1,2	Isr: 1
+Topic: ventas-aggregator-KTABLE-SUPPRESS-STATE-STORE-0000000014-changelog	TopicId: zmkaU9f9SCilvxxWseuEUw	PartitionCount: 4	ReplicationFactor: 2	Configs: min.insync.replicas=1,cleanup.policy=compact,message.timestamp.type=CreateTime
+	Topic: ventas-aggregator-KTABLE-SUPPRESS-STATE-STORE-0000000014-changelog	Partition: 0	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: ventas-aggregator-KTABLE-SUPPRESS-STATE-STORE-0000000014-changelog	Partition: 1	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: ventas-aggregator-KTABLE-SUPPRESS-STATE-STORE-0000000014-changelog	Partition: 2	Leader: 1	Replicas: 2,1	Isr: 1
+--
+Topic: ventas-aggregator-KTABLE-SUPPRESS-STATE-STORE-0000000009-changelog	TopicId: 4yxEannmTaGiKIbbG22Nqg	PartitionCount: 4	ReplicationFactor: 2	Configs: min.insync.replicas=1,cleanup.policy=compact,message.timestamp.type=CreateTime
+	Topic: ventas-aggregator-KTABLE-SUPPRESS-STATE-STORE-0000000009-changelog	Partition: 0	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: ventas-aggregator-KTABLE-SUPPRESS-STATE-STORE-0000000009-changelog	Partition: 1	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: ventas-aggregator-KTABLE-SUPPRESS-STATE-STORE-0000000009-changelog	Partition: 2	Leader: 1	Replicas: 2,1	Isr: 1
+--
+Topic: ventas-raw-dlq	TopicId: 8oAoUEIMTOSVJ4MlZ1ewDQ	PartitionCount: 4	ReplicationFactor: 2	Configs: min.insync.replicas=1
+	Topic: ventas-raw-dlq	Partition: 0	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: ventas-raw-dlq	Partition: 1	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: ventas-raw-dlq	Partition: 2	Leader: 1	Replicas: 2,1	Isr: 1
+--
+Topic: ventas-aggregator-ventas-por-tienda-changelog	TopicId: X_6OuA2zS9uT7NCPWSGeoA	PartitionCount: 4	ReplicationFactor: 2	Configs: min.insync.replicas=1,cleanup.policy=compact,delete,retention.ms=86460000,message.timestamp.type=CreateTime
+	Topic: ventas-aggregator-ventas-por-tienda-changelog	Partition: 0	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: ventas-aggregator-ventas-por-tienda-changelog	Partition: 1	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: ventas-aggregator-ventas-por-tienda-changelog	Partition: 2	Leader: 1	Replicas: 1,2	Isr: 1
+--
+Topic: ventas-aggregator-ventas-por-tienda-repartition	TopicId: 66Xik2kMTum96ssCugUibA	PartitionCount: 4	ReplicationFactor: 2	Configs: min.insync.replicas=1,cleanup.policy=delete,segment.bytes=52428800,retention.ms=-1,message.timestamp.type=CreateTime
+	Topic: ventas-aggregator-ventas-por-tienda-repartition	Partition: 0	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: ventas-aggregator-ventas-por-tienda-repartition	Partition: 1	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: ventas-aggregator-ventas-por-tienda-repartition	Partition: 2	Leader: 1	Replicas: 1,2	Isr: 1
+--
+Topic: ventas-raw	TopicId: lS23mHh9RZu4nXPK6iobeQ	PartitionCount: 4	ReplicationFactor: 2	Configs: min.insync.replicas=1
+	Topic: ventas-raw	Partition: 0	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: ventas-raw	Partition: 1	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: ventas-raw	Partition: 2	Leader: 1	Replicas: 1,2	Isr: 1
+== under-replicated (vacio si sano) ==
+	Topic: ventas-aggregator-eventos-procesados-changelog	Partition: 0	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: ventas-aggregator-eventos-procesados-changelog	Partition: 1	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: ventas-aggregator-eventos-procesados-changelog	Partition: 2	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: ventas-aggregator-eventos-procesados-changelog	Partition: 3	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: ventas-agregadas	Partition: 0	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: ventas-agregadas	Partition: 1	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: ventas-aggregator-KTABLE-SUPPRESS-STATE-STORE-0000000014-changelog	Partition: 0	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: ventas-aggregator-KTABLE-SUPPRESS-STATE-STORE-0000000014-changelog	Partition: 1	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: ventas-aggregator-KTABLE-SUPPRESS-STATE-STORE-0000000014-changelog	Partition: 2	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: ventas-aggregator-KTABLE-SUPPRESS-STATE-STORE-0000000014-changelog	Partition: 3	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: ventas-aggregator-KTABLE-SUPPRESS-STATE-STORE-0000000009-changelog	Partition: 0	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: ventas-aggregator-KTABLE-SUPPRESS-STATE-STORE-0000000009-changelog	Partition: 1	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: ventas-aggregator-KTABLE-SUPPRESS-STATE-STORE-0000000009-changelog	Partition: 2	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: ventas-aggregator-KTABLE-SUPPRESS-STATE-STORE-0000000009-changelog	Partition: 3	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: ventas-raw-dlq	Partition: 0	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: ventas-raw-dlq	Partition: 1	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: ventas-raw-dlq	Partition: 2	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: ventas-raw-dlq	Partition: 3	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __transaction_state	Partition: 0	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __transaction_state	Partition: 1	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __transaction_state	Partition: 2	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __transaction_state	Partition: 3	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __transaction_state	Partition: 4	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __transaction_state	Partition: 5	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __transaction_state	Partition: 6	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __transaction_state	Partition: 7	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __transaction_state	Partition: 8	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __transaction_state	Partition: 9	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __transaction_state	Partition: 10	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __transaction_state	Partition: 11	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __transaction_state	Partition: 12	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __transaction_state	Partition: 13	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __transaction_state	Partition: 14	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __transaction_state	Partition: 15	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __transaction_state	Partition: 16	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __transaction_state	Partition: 17	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __transaction_state	Partition: 18	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __transaction_state	Partition: 19	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __transaction_state	Partition: 20	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __transaction_state	Partition: 21	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __transaction_state	Partition: 22	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __transaction_state	Partition: 23	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __transaction_state	Partition: 24	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __transaction_state	Partition: 25	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __transaction_state	Partition: 26	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __transaction_state	Partition: 27	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __transaction_state	Partition: 28	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __transaction_state	Partition: 29	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __transaction_state	Partition: 30	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __transaction_state	Partition: 31	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __transaction_state	Partition: 32	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __transaction_state	Partition: 33	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __transaction_state	Partition: 34	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __transaction_state	Partition: 35	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __transaction_state	Partition: 36	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __transaction_state	Partition: 37	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __transaction_state	Partition: 38	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __transaction_state	Partition: 39	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __transaction_state	Partition: 40	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __transaction_state	Partition: 41	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __transaction_state	Partition: 42	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __transaction_state	Partition: 43	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __transaction_state	Partition: 44	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __transaction_state	Partition: 45	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __transaction_state	Partition: 46	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __transaction_state	Partition: 47	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __transaction_state	Partition: 48	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __transaction_state	Partition: 49	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: ventas-aggregator-ventas-por-tienda-changelog	Partition: 0	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: ventas-aggregator-ventas-por-tienda-changelog	Partition: 1	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: ventas-aggregator-ventas-por-tienda-changelog	Partition: 2	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: ventas-aggregator-ventas-por-tienda-changelog	Partition: 3	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: ventas-aggregator-ventas-por-tienda-repartition	Partition: 0	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: ventas-aggregator-ventas-por-tienda-repartition	Partition: 1	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: ventas-aggregator-ventas-por-tienda-repartition	Partition: 2	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: ventas-aggregator-ventas-por-tienda-repartition	Partition: 3	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: ventas-raw	Partition: 0	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: ventas-raw	Partition: 1	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: ventas-raw	Partition: 2	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: ventas-raw	Partition: 3	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __consumer_offsets	Partition: 0	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __consumer_offsets	Partition: 1	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __consumer_offsets	Partition: 2	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __consumer_offsets	Partition: 3	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __consumer_offsets	Partition: 4	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __consumer_offsets	Partition: 5	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __consumer_offsets	Partition: 6	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __consumer_offsets	Partition: 7	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __consumer_offsets	Partition: 8	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __consumer_offsets	Partition: 9	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __consumer_offsets	Partition: 10	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __consumer_offsets	Partition: 11	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __consumer_offsets	Partition: 12	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __consumer_offsets	Partition: 13	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __consumer_offsets	Partition: 14	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __consumer_offsets	Partition: 15	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __consumer_offsets	Partition: 16	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __consumer_offsets	Partition: 17	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __consumer_offsets	Partition: 18	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __consumer_offsets	Partition: 19	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __consumer_offsets	Partition: 20	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __consumer_offsets	Partition: 21	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __consumer_offsets	Partition: 22	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __consumer_offsets	Partition: 23	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __consumer_offsets	Partition: 24	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __consumer_offsets	Partition: 25	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __consumer_offsets	Partition: 26	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __consumer_offsets	Partition: 27	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __consumer_offsets	Partition: 28	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __consumer_offsets	Partition: 29	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __consumer_offsets	Partition: 30	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __consumer_offsets	Partition: 31	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __consumer_offsets	Partition: 32	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __consumer_offsets	Partition: 33	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __consumer_offsets	Partition: 34	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __consumer_offsets	Partition: 35	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __consumer_offsets	Partition: 36	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __consumer_offsets	Partition: 37	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __consumer_offsets	Partition: 38	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __consumer_offsets	Partition: 39	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __consumer_offsets	Partition: 40	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __consumer_offsets	Partition: 41	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __consumer_offsets	Partition: 42	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __consumer_offsets	Partition: 43	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __consumer_offsets	Partition: 44	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __consumer_offsets	Partition: 45	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __consumer_offsets	Partition: 46	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __consumer_offsets	Partition: 47	Leader: 1	Replicas: 1,2	Isr: 1
+	Topic: __consumer_offsets	Partition: 48	Leader: 1	Replicas: 2,1	Isr: 1
+	Topic: __consumer_offsets	Partition: 49	Leader: 1	Replicas: 1,2	Isr: 1

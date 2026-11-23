@@ -1,0 +1,44 @@
+flowchart TD
+    %% Productor
+    P[("Productor Java<br/>ProducerApp")] -->|key=eventId<br/>ts=eventTime<br/>acks=all, idempotente| RAW[(("ventas-raw<br/>4 p · RF=2 · ISR 1,2<br/>retención 7 d"))]
+
+    %% Validación y DLQ
+    RAW --> V{Validación<br/>SaleValidator}
+    V -->|JSON inválido<br/>campo obligatorio<br/>eventTime inválido<br/>total inconsistente| DLQ[(("ventas-raw-dlq<br/>4 p · RF=2<br/>sobre: motivo, clave,<br/>tópico, original, detected_at"))]
+    V -->|válido| D{Dedupe por eventId<br/>store eventos-procesados<br/>RocksDB + changelog RF2<br/>retención 7 d}
+
+    %% Deduplicación
+    D -->|mismo eventId +<br/>mismo payload| XP[("Descartado<br/>DUPLICADO<br/>log, no cuenta")]
+    D -->|mismo eventId,<br/>payload distinto| XP2[("Descartado<br/>DUPLICADO_CON_DIFERENCIAS<br/>se conserva el primero")]
+    D -->|eventId nuevo| K[Rekey por tienda<br/>selectKey(store)]
+
+    %% Ventanas y agregación
+    K --> W[Ventana tumbling 60 s<br/>por eventTime<br/>gracia 30 s<br/>suppress al cerrar]
+    W -->|dentro de gracia| AGG[(("ventas-agregadas<br/>2 p · RF=2<br/>ventana_inicio, ventana_fin,<br/>tienda, conteo, monto,<br/>ticket promedio"))]
+    W -->|fuera de gracia| DR[("Descartado por ventana<br/>expirada<br/>dropped_records<br/>NO va a DLQ")]
+
+    %% Observabilidad
+    AGG --> G[Grafana<br/>dashboards]
+    DLQ --> G
+    XP --> L[Loki<br/>logs de Streams]
+    XP2 --> L
+    DR --> M[Prometheus<br/>kafka_streams_...<br/>dropped_records]
+    K --> M
+    V --> M
+    RAW -.-> UI[Kafka UI<br/>:8080<br/>tópicos, offsets, lag]
+    AGG -.-> UI
+    CG[("Consumer group<br/>ventas-aggregator<br/>offsets + lag")] -.-> UI
+
+    %% Brokers
+    B1[("Broker 1<br/>10.10.0.33:9092<br/>+ ZooKeeper 2181<br/>+ Kafka UI 8080")]
+    B2[("Broker 2<br/>10.10.0.126:9092")]
+    B1 <-->|replicación RF2| B2
+    RAW -.->|líderes<br/>ISR 1,2| B1
+    AGG -.->|líderes<br/>ISR 1,2| B1
+
+    style P fill:#e1f5e1,stroke:#2e7d32
+    style DLQ fill:#ffebee,stroke:#c62828
+    style AGG fill:#e3f2fd,stroke:#1565c0
+    style W fill:#fff3e0,stroke:#ef6c00
+    style D fill:#f3e5f5,stroke:#7b1fa2
+    style UI fill:#eceff1,stroke:#455a64
