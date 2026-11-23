@@ -29,6 +29,9 @@ public final class StreamsApp {
     private static final Logger LOG = LoggerFactory.getLogger(StreamsApp.class);
 
     private static final String STATE_STORE = "ventas-por-tienda";
+    private static final String DEDUPE_STORE = "eventos-procesados";
+    private static final long DEDUPE_RETENTION_SECONDS = 604_800; // 7 días
+    private static final long DEDUPE_PURGE_SECONDS = 600;         // cada 10 minutos
 
     public static void main(String[] args) {
         String bootstrap = env("KAFKA_BOOTSTRAP", "localhost:9092");
@@ -38,6 +41,8 @@ public final class StreamsApp {
         String applicationId = env("GROUP_ID", "ventas-aggregator");
         long windowSeconds = Long.parseLong(env("WINDOW_SECONDS", "60"));
         long graceSeconds = Long.parseLong(env("WINDOW_GRACE_SECONDS", "30"));
+        long dedupeRetentionSeconds = Long.parseLong(env("DEDUPE_RETENTION_SECONDS", "604800"));
+        long dedupePurgeSeconds = Long.parseLong(env("DEDUPE_PURGE_INTERVAL_SECONDS", "600"));
 
         var props = new Properties();
         props.put(StreamsConfig.APPLICATION_ID_CONFIG, applicationId);
@@ -51,18 +56,32 @@ public final class StreamsApp {
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
         var streams = new KafkaStreams(
-                buildTopology(rawTopic, aggTopic, dlqTopic, windowSeconds, graceSeconds),
+                buildTopology(rawTopic, aggTopic, dlqTopic, windowSeconds, graceSeconds,
+                        dedupeRetentionSeconds, dedupePurgeSeconds),
                 props);
         Runtime.getRuntime().addShutdownHook(new Thread(streams::close));
 
-        LOG.info("Kafka Streams app={} raw={} agg={} dlq={} ventana={}s gracia={}s",
-                applicationId, rawTopic, aggTopic, dlqTopic, windowSeconds, graceSeconds);
+        LOG.info("Kafka Streams app={} raw={} agg={} dlq={} ventana={}s gracia={}s dedupe={}s",
+                applicationId, rawTopic, aggTopic, dlqTopic, windowSeconds, graceSeconds,
+                dedupeRetentionSeconds);
         streams.start();
     }
 
     public static org.apache.kafka.streams.Topology buildTopology(
             String rawTopic, String aggTopic, String dlqTopic, long windowSeconds, long graceSeconds) {
+        return buildTopology(rawTopic, aggTopic, dlqTopic, windowSeconds, graceSeconds,
+                DEDUPE_RETENTION_SECONDS, DEDUPE_PURGE_SECONDS);
+    }
+
+    public static org.apache.kafka.streams.Topology buildTopology(
+            String rawTopic, String aggTopic, String dlqTopic, long windowSeconds, long graceSeconds,
+            long dedupeRetentionSeconds, long dedupePurgeSeconds) {
         StreamsBuilder builder = new StreamsBuilder();
+
+        builder.addStateStore(org.apache.kafka.streams.state.Stores.keyValueStoreBuilder(
+                org.apache.kafka.streams.state.Stores.persistentKeyValueStore(DEDUPE_STORE),
+                Serdes.String(),
+                Serdes.String()));
 
         KStream<String, String> raw = builder.stream(
                 rawTopic,
@@ -86,6 +105,11 @@ public final class StreamsApp {
         KTable<Windowed<String>, TicketAggregate> aggregate = checked
                 .filter((key, result) -> result.valid(), Named.as("eventos-validos"))
                 .mapValues(ValidationResult::sale, Named.as("dto-venta"))
+                .transform(
+                        () -> new DedupeTransformer(
+                                DEDUPE_STORE, dedupeRetentionSeconds, dedupePurgeSeconds),
+                        Named.as("dedupe-por-eventid"),
+                        DEDUPE_STORE)
                 .selectKey((key, sale) -> sale.store(), Named.as("rekey-por-tienda"))
                 .groupByKey(Grouped.with(Serdes.String(), new JsonSerde<>(Sale.class)))
                 .windowedBy(windows)
