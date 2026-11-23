@@ -1,0 +1,81 @@
+name: kafka-broker
+
+services:
+  zookeeper:
+    profiles: ["zk"]
+    image: confluentinc/cp-zookeeper:7.6.14
+    container_name: zookeeper
+    restart: unless-stopped
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+      JAVA_TOOL_OPTIONS: "-javaagent:/opt/monitoring/jmx/jmx_prometheus_javaagent-1.7.0.jar=9405:/opt/monitoring/jmx/config.yml"
+    ports:
+      - "2181:2181"
+      - "${BROKER_PRIVATE_IP:?define BROKER_PRIVATE_IP en el env-file}:9405:9405"
+    volumes:
+      - zookeeper-data:/var/lib/zookeeper/data
+      - zookeeper-log:/var/lib/zookeeper/log
+      - /opt/monitoring/jmx:/opt/monitoring/jmx:ro
+    healthcheck:
+      test: ["CMD-SHELL", "env -u JAVA_TOOL_OPTIONS cub zk-ready localhost 2181 >/dev/null 2>&1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+
+  kafka:
+    image: confluentinc/cp-kafka:7.6.14
+    container_name: kafka
+    restart: unless-stopped
+    ports:
+      - "9092:9092"
+      - "${BROKER_PRIVATE_IP:?define BROKER_PRIVATE_IP en el env-file}:9404:9404"
+    environment:
+      KAFKA_BROKER_ID: ${BROKER_ID:?define BROKER_ID en el env-file}
+      KAFKA_ZOOKEEPER_CONNECT: ${ZK_CONNECT:?define ZK_CONNECT en el env-file}
+      JAVA_TOOL_OPTIONS: "-javaagent:/opt/monitoring/jmx/jmx_prometheus_javaagent-1.7.0.jar=9404:/opt/monitoring/jmx/config.yml"
+      KAFKA_LISTENERS: PLAINTEXT://:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://${BROKER_PRIVATE_IP:?define BROKER_PRIVATE_IP en el env-file}:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 2
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 2
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_DEFAULT_REPLICATION_FACTOR: 2
+      KAFKA_MIN_INSYNC_REPLICAS: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
+    volumes:
+      - kafka-data:/var/lib/kafka/data
+      - /opt/monitoring/jmx:/opt/monitoring/jmx:ro
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - env -u JAVA_TOOL_OPTIONS kafka-broker-api-versions --bootstrap-server localhost:9092 >/dev/null 2>&1
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  kafka-ui:
+    profiles: ["ui"]
+    image: provectuslabs/kafka-ui:v0.7.2
+    container_name: kafka-ui
+    restart: unless-stopped
+    environment:
+      KAFKA_CLUSTERS_0_NAME: ventas-lab
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: ${KAFKA_BOOTSTRAP:?define KAFKA_BOOTSTRAP en el env-file}
+      KAFKA_CLUSTERS_0_ZOOKEEPER: ${ZK_CONNECT:?define ZK_CONNECT en el env-file}
+      KAFKA_CLUSTERS_0_READONLY: "true"
+      AUTH_TYPE: LOGIN_FORM
+      SPRING_SECURITY_USER_NAME: ${KAFKA_UI_USERNAME:?define KAFKA_UI_USERNAME en el env-file}
+      SPRING_SECURITY_USER_PASSWORD: ${KAFKA_UI_PASSWORD:?define KAFKA_UI_PASSWORD en el env-file}
+    ports:
+      - "8080:8080"
+
+volumes:
+  zookeeper-data:
+  zookeeper-log:
+  kafka-data:

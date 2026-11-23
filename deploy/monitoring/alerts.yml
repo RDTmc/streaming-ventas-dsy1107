@@ -1,0 +1,96 @@
+groups:
+  - name: infraestructura
+    rules:
+      - alert: TargetDown
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Target caído: {{ $labels.job }} ({{ $labels.instance }})"
+          description: "Prometheus no puede recolectar métricas de {{ $labels.instance }} (job {{ $labels.job }}) desde hace más de 1 minuto."
+
+      - alert: NodeHighCpuUsage
+        expr: 100 - (avg by (node) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 95
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "CPU saturada en {{ $labels.node }}"
+          description: "El uso de CPU de {{ $labels.node }} supera el 95 % desde hace 10 minutos (basal del lab ~80 % por scrape JMX en t3.small)."
+
+      - alert: NodeHighMemoryUsage
+        expr: (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) * 100 > 95
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Memoria casi agotada en {{ $labels.node }}"
+          description: "El uso de memoria de {{ $labels.node }} supera el 95 % desde hace 10 minutos (kafka-1 corre ZK + Kafka + JMX + UI en 2 GB y suele estar ~90 %)."
+
+      - alert: NodeDiskSpaceLow
+        expr: (node_filesystem_avail_bytes{job="node-exporter", mountpoint="/", fstype!~"tmpfs|overlay"} / node_filesystem_size_bytes{job="node-exporter", mountpoint="/", fstype!~"tmpfs|overlay"}) * 100 < 15
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Disco bajo en {{ $labels.node }}"
+          description: "Queda menos del 15 % libre en la raíz de {{ $labels.node }}."
+
+  - name: kafka
+    rules:
+      - alert: KafkaBrokerDown
+        expr: up{job="kafka-brokers"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Broker Kafka caído o JMX inaccesible ({{ $labels.instance }})"
+          description: "Prometheus no puede leer el JMX del broker {{ $labels.instance }} desde hace más de 1 minuto."
+
+      - alert: ZooKeeperDown
+        expr: up{job="zookeeper"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "ZooKeeper caído o JMX inaccesible"
+          description: "Prometheus no puede leer el JMX de ZooKeeper ({{ $labels.instance }}) desde hace más de 1 minuto."
+
+      - alert: KafkaUnderReplicatedPartitions
+        expr: sum(kafka_cluster_Partition_Value{name="UnderReplicated"}) > 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Particiones sub-replicadas en el clúster Kafka"
+          description: "Hay {{ $value }} particiones por debajo del factor de replicación esperado."
+
+      - alert: KafkaNoActiveController
+        expr: sum(kafka_controller_KafkaController_Value{name="ActiveControllerCount"}) != 1
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "El clúster Kafka no tiene exactamente un controller activo"
+          description: "La suma de controllers activos es {{ $value }} (se espera 1)."
+
+  - name: aplicacion
+    rules:
+      - alert: VentasAppDown
+        expr: up{job="ventas-app"} == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "App de ventas caída ({{ $labels.instance }})"
+          description: "El endpoint JMX de la app {{ $labels.instance }} no responde desde hace más de 2 minutos."
+
+      - alert: StreamsNotRunning
+        expr: kafka_streams_stream_metrics_alive_stream_threads < 1
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Kafka Streams sin hilos activos"
+          description: "La app de agregación no reporta hilos vivos de Kafka Streams."

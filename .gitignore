@@ -1,0 +1,28 @@
+# Secretos y credenciales
+*.pem
+*.key
+*.p12
+*.pfx
+**/*.env
+!**/*.env.example
+!**/*.env.template
+
+# Estado local de herramientas
+.aws/
+.kube/
+.env
+.env.*
+
+# Build de Java/Maven
+**/target/
+**/*.jar
+**/*.class
+
+# IDE y sistema operativo
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Evidencia temporal
+evidence/**/tmp/

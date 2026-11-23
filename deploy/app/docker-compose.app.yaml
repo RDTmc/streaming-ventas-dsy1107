@@ -1,0 +1,28 @@
+name: ventas-app
+
+services:
+  producer:
+    build: ./app
+    command: ["java", "-cp", "/app/app.jar", "cl.duoc.ventas.ProducerApp"]
+    env_file:
+      - app.env
+    environment:
+      JAVA_TOOL_OPTIONS: "-javaagent:/opt/monitoring/jmx/jmx_prometheus_javaagent-1.7.0.jar=9406:/opt/monitoring/jmx/config.yml"
+    ports:
+      - "${APP_PRIVATE_IP:?define APP_PRIVATE_IP en app.env}:9406:9406"
+    volumes:
+      - /opt/monitoring/jmx:/opt/monitoring/jmx:ro
+    restart: unless-stopped
+
+  consumer:
+    build: ./app
+    command: ["java", "-cp", "/app/app.jar", "cl.duoc.ventas.StreamsApp"]
+    env_file:
+      - app.env
+    environment:
+      JAVA_TOOL_OPTIONS: "-javaagent:/opt/monitoring/jmx/jmx_prometheus_javaagent-1.7.0.jar=9407:/opt/monitoring/jmx/config.yml"
+    ports:
+      - "${APP_PRIVATE_IP:?define APP_PRIVATE_IP en app.env}:9407:9407"
+    volumes:
+      - /opt/monitoring/jmx:/opt/monitoring/jmx:ro
+    restart: unless-stopped
