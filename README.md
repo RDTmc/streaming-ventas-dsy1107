@@ -149,38 +149,7 @@ Comprueba EC2, health de Kafka/ZooKeeper, JMX, topics, app, Prometheus/Grafana/L
 
 ---
 
-## 7. Defensa individual (EP6)
-
-EP6 no pide código nuevo: pide **demostrar y explicar** lo construido en EP5 en 5–10 minutos. Todo lo necesario está en este repo:
-
-- `arquitectura_encargo.mmd`: diagrama de arquitectura con claves, particiones, RF, DLQ y observabilidad.
-- `evidence/m1/`, `evidence/m2/`, `evidence/m3/`, `evidence/m5/`: evidencia real de cada escenario.
-- `scripts/demo-dedupe.sh`, `scripts/demo-tardios.sh`: guiones de demostración.
-- `scripts/lab-ops.sh`, `scripts/m5-checks.sh`: comandos de operación del clúster.
-- `docs/plan-ep5-ep6.md`: análisis, riesgos y plan de trabajo.
-
-### Guion de demostración (≈10 min)
-
-1. **Flujo normal:** venta válida → `ventas-raw` → `ventas-agregadas` (ventana 60 s, tienda, conteo, monto, ticket promedio).
-2. **Mensaje defectuoso:** JSON malformado / campo faltante / total inconsistente → `ventas-raw-dlq` con sobre (`reason`, `key`, `original`, `detected_at`).
-3. **Duplicado:** mismo `eventId` dos veces → `DUPLICADO`, se cuenta una sola vez (estado RocksDB, changelog RF=2).
-4. **Tardío:** `eventTime` fuera de gracia → descartado por ventana, métrica `dropped_records`, **no entra a DLQ**.
-5. **Tolerancia a fallos:** caer broker 2, ver ISR `1` → `1,2` al reiniciar; el clúster sigue operativo.
-6. **Observabilidad:** Kafka UI (tópicos, offsets, lag), Prometheus/Grafana/JMX, Loki logs.
-
-### Hoja de respuestas (7 preguntas obligatorias de EP6)
-
-| Pregunta | Respuesta resumida |
-|---|---|
-| EOS v2 vs dedupe de negocio | EOS v2 evita duplicados por reintentos de procesamiento (transacciones). No evita que el mismo evento de negocio se produzca dos veces; por eso hay estado `eventos-procesados` por `eventId`. |
-| eventTime vs arrival time | Las ventanas se rigen por `eventTime` (timestamp del registro fijado desde el campo). Si es inválido, cae al arrival time y el evento va a validación/DLQ. |
-| ISR / RF / min.insync.replicas | RF=2, `min.insync.replicas=1`. Con 2 brokers no tiene sentido RF=3. ISR muestra quién está sincronizado; si cae un broker, el líder restante sigue atendiendo. |
-| Restauración de estado | Los stores (RocksDB) tienen changelog replicado RF=2. Al recrear el contenedor, Streams restaura desde el changelog y reanuda sin doble conteo. |
-| Consumer group y lag | Grupo `ventas-aggregator` sobre `ventas-raw`; lag visible en Kafka UI y `kafka-consumer-groups`. |
-| DLQ vs evento tardío | DLQ es para datos **inválidos** (JSON/campos/total). Un evento **válido pero tardío** se descarta por ventana, nunca va a DLQ. |
-| ZooKeeper como SPOF | ZooKeeper corre en un solo nodo (kafka-1): es punto único de falla de la arquitectura base del laboratorio. |
-
-## 8. Estado del laboratorio (línea base + extensiones)
+## 7. Estado del laboratorio (línea base + extensiones)
 
 | Iteración | Qué se añadió | Verificación |
 |---|---|---|
@@ -192,14 +161,14 @@ EP6 no pide código nuevo: pide **demostrar y explicar** lo construido en EP5 en
 
 > El laboratorio estuvo sano (`verify-lab.ps1` 31/31 PASS) al finalizar cada iteración.
 
-## 9. Documentación y entrega
+## 8. Documentación y entrega
 
 - `docs/plan-ep5-ep6.md`: análisis del encargo, riesgos de ruptura, mitigaciones y plan M0–M7.
 - `evidence/baseline/`: estado del laboratorio antes de los cambios (M0).
 - `evidence/m1|m2|m3|m5/`: evidencia de cada iteración.
 - **No se suben secretos:** `.env`, `.pem` y credenciales quedan fuera del repositorio (`.gitignore`).
 
-## 10. Seguridad
+## 9. Seguridad
 
 - No se versionan `.env`, llaves `.pem` ni credenciales.
 - Las contraseñas de ejemplo son marcadores (`replace-with-a-strong-password`).
