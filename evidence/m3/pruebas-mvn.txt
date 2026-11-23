@@ -1,0 +1,314 @@
+﻿[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------------< cl.duoc:ventas-lab >-------------------------
+[INFO] Building ventas-lab 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ventas-lab ---
+[INFO] skip non existing resourceDirectory C:\000 - devop-ing\streaming-ventas-dsy1107\app\app\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ ventas-lab ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ ventas-lab ---
+[INFO] skip non existing resourceDirectory C:\000 - devop-ing\streaming-ventas-dsy1107\app\app\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ ventas-lab ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 6 source files with javac [debug release 21] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ ventas-lab ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running cl.duoc.ventas.SaleValidatorTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.222 s -- in cl.duoc.ventas.SaleValidatorTest
+[INFO] Running cl.duoc.ventas.TopologyAggregationTest
+mvn : [main] INFO org.apache.kafka.streams.kstream.internals.KTableImpl - Using grace period of [PT30S] as the 
+suppress duration for node [KTABLE-SUPPRESS-0000000013].
+En línea: 2 Carácter: 1
++ mvn -B test 2>&1 | Out-File -Encoding utf8 "C:\000 - devop-ing\stream ...
++ ~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([main] INFO org...SS-0000000013].:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[main] WARN org.apache.kafka.streams.processor.internals.StateDirectory - Using an OS temp directory in the state.dir 
+property can cause failures with writing the checkpoint file due to the fact that this directory can be cleared by the 
+OS. Resolved state.dir: [C:\Users\rdmun\AppData\Local\Temp\kafka-streams-test1678982497395523230]
+[main] ERROR org.apache.kafka.streams.processor.internals.StateDirectory - Failed to change permissions for the 
+directory C:\Users\rdmun\AppData\Local\Temp\kafka-streams-test1678982497395523230
+[main] ERROR org.apache.kafka.streams.processor.internals.StateDirectory - Failed to change permissions for the 
+directory 
+C:\Users\rdmun\AppData\Local\Temp\kafka-streams-test1678982497395523230\test-e051a138-4afa-4f21-91ee-c3ebb9ff3a25
+[main] INFO org.apache.kafka.streams.processor.internals.ProcessorStateManager - topology-test-driver State store 
+eventos-procesados did not find checkpoint offset, hence would default to the starting offset at changelog 
+test-e051a138-4afa-4f21-91ee-c3ebb9ff3a25-eventos-procesados-changelog-0
+[main] INFO org.apache.kafka.streams.processor.internals.ProcessorStateManager - topology-test-driver State store 
+ventas-por-tienda did not find checkpoint offset, hence would default to the starting offset at changelog 
+test-e051a138-4afa-4f21-91ee-c3ebb9ff3a25-ventas-por-tienda-changelog-0
+[main] INFO org.apache.kafka.streams.processor.internals.ProcessorStateManager - topology-test-driver Initializing to 
+the starting offset for changelog 
+test-e051a138-4afa-4f21-91ee-c3ebb9ff3a25-KTABLE-SUPPRESS-STATE-STORE-0000000014-changelog-0 of in-memory state store 
+KTABLE-SUPPRESS-STATE-STORE-0000000014
+[main] INFO org.apache.kafka.streams.processor.internals.StreamTask - stream-thread [main] task [0_0] Initialized
+[main] INFO cl.duoc.ventas.DedupeTransformer - dedupe activo store=eventos-procesados retencion=604800s purga=600s
+[main] INFO org.apache.kafka.streams.processor.internals.StreamTask - stream-thread [main] task [0_0] Restored and 
+ready to run
+[main] INFO org.apache.kafka.streams.state.internals.RocksDBTimestampedStore - Opening store 
+ventas-por-tienda.1767225600000 in regular mode
+[main] INFO org.apache.kafka.streams.state.internals.RocksDBTimestampedStore - Opening store 
+ventas-por-tienda.1767225720000 in regular mode
+[main] INFO org.apache.kafka.streams.processor.internals.StreamTask - stream-thread [main] task [0_0] Suspended from 
+RUNNING
+[main] INFO org.apache.kafka.streams.processor.internals.RecordCollectorImpl - topology-test-driver Closing record 
+collector clean
+[main] INFO org.apache.kafka.streams.processor.internals.StreamTask - stream-thread [main] task [0_0] Closed clean
+[main] INFO org.apache.kafka.streams.processor.internals.StateDirectory - stream-thread [main] Deleting task directory 
+0_0 for 0_0 as user calling cleanup.
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.545 s -- in cl.duoc.ventas.TopologyAggregationTest
+[INFO] Running cl.duoc.ventas.TopologyDedupeTest
+[main] INFO org.apache.kafka.streams.kstream.internals.KTableImpl - Using grace period of [PT30S] as the suppress 
+duration for node [KTABLE-SUPPRESS-0000000013].
+[main] WARN org.apache.kafka.streams.processor.internals.StateDirectory - Using an OS temp directory in the state.dir 
+property can cause failures with writing the checkpoint file due to the fact that this directory can be cleared by the 
+OS. Resolved state.dir: [C:\Users\rdmun\AppData\Local\Temp\kafka-streams-test6188838643483699820]
+[main] ERROR org.apache.kafka.streams.processor.internals.StateDirectory - Failed to change permissions for the 
+directory C:\Users\rdmun\AppData\Local\Temp\kafka-streams-test6188838643483699820
+[main] ERROR org.apache.kafka.streams.processor.internals.StateDirectory - Failed to change permissions for the 
+directory 
+C:\Users\rdmun\AppData\Local\Temp\kafka-streams-test6188838643483699820\test-da9c5fda-9fc3-44be-8146-4341c4373100
+[main] INFO org.apache.kafka.streams.processor.internals.ProcessorStateManager - topology-test-driver State store 
+eventos-procesados did not find checkpoint offset, hence would default to the starting offset at changelog 
+test-da9c5fda-9fc3-44be-8146-4341c4373100-eventos-procesados-changelog-0
+[main] INFO org.apache.kafka.streams.processor.internals.ProcessorStateManager - topology-test-driver State store 
+ventas-por-tienda did not find checkpoint offset, hence would default to the starting offset at changelog 
+test-da9c5fda-9fc3-44be-8146-4341c4373100-ventas-por-tienda-changelog-0
+[main] INFO org.apache.kafka.streams.processor.internals.ProcessorStateManager - topology-test-driver Initializing to 
+the starting offset for changelog 
+test-da9c5fda-9fc3-44be-8146-4341c4373100-KTABLE-SUPPRESS-STATE-STORE-0000000014-changelog-0 of in-memory state store 
+KTABLE-SUPPRESS-STATE-STORE-0000000014
+[main] INFO org.apache.kafka.streams.processor.internals.StreamTask - stream-thread [main] task [0_0] Initialized
+[main] INFO cl.duoc.ventas.DedupeTransformer - dedupe activo store=eventos-procesados retencion=604800s purga=600s
+[main] INFO org.apache.kafka.streams.processor.internals.StreamTask - stream-thread [main] task [0_0] Restored and 
+ready to run
+[main] INFO org.apache.kafka.streams.state.internals.RocksDBTimestampedStore - Opening store 
+ventas-por-tienda.1767225600000 in regular mode
+[main] INFO cl.duoc.ventas.DedupeTransformer - DUPLICADO eventId=evt-1 store=Tienda A
+[main] INFO org.apache.kafka.streams.state.internals.RocksDBTimestampedStore - Opening store 
+ventas-por-tienda.1767225720000 in regular mode
+[main] INFO org.apache.kafka.streams.processor.internals.StreamTask - stream-thread [main] task [0_0] Suspended from 
+RUNNING
+[main] INFO org.apache.kafka.streams.processor.internals.RecordCollectorImpl - topology-test-driver Closing record 
+collector clean
+[main] INFO org.apache.kafka.streams.processor.internals.StreamTask - stream-thread [main] task [0_0] Closed clean
+[main] INFO org.apache.kafka.streams.processor.internals.StateDirectory - stream-thread [main] Deleting task directory 
+0_0 for 0_0 as user calling cleanup.
+[main] INFO org.apache.kafka.streams.kstream.internals.KTableImpl - Using grace period of [PT30S] as the suppress 
+duration for node [KTABLE-SUPPRESS-0000000013].
+[main] WARN org.apache.kafka.streams.processor.internals.StateDirectory - Using an OS temp directory in the state.dir 
+property can cause failures with writing the checkpoint file due to the fact that this directory can be cleared by the 
+OS. Resolved state.dir: [C:\Users\rdmun\AppData\Local\Temp\kafka-streams-test9075815953023823751]
+[main] ERROR org.apache.kafka.streams.processor.internals.StateDirectory - Failed to change permissions for the 
+directory C:\Users\rdmun\AppData\Local\Temp\kafka-streams-test9075815953023823751
+[main] ERROR org.apache.kafka.streams.processor.internals.StateDirectory - Failed to change permissions for the 
+directory 
+C:\Users\rdmun\AppData\Local\Temp\kafka-streams-test9075815953023823751\test-8a476ee9-a47b-48c1-8586-d9766aec3c2b
+[main] INFO org.apache.kafka.streams.processor.internals.ProcessorStateManager - topology-test-driver State store 
+eventos-procesados did not find checkpoint offset, hence would default to the starting offset at changelog 
+test-8a476ee9-a47b-48c1-8586-d9766aec3c2b-eventos-procesados-changelog-0
+[main] INFO org.apache.kafka.streams.processor.internals.ProcessorStateManager - topology-test-driver State store 
+ventas-por-tienda did not find checkpoint offset, hence would default to the starting offset at changelog 
+test-8a476ee9-a47b-48c1-8586-d9766aec3c2b-ventas-por-tienda-changelog-0
+[main] INFO org.apache.kafka.streams.processor.internals.ProcessorStateManager - topology-test-driver Initializing to 
+the starting offset for changelog 
+test-8a476ee9-a47b-48c1-8586-d9766aec3c2b-KTABLE-SUPPRESS-STATE-STORE-0000000014-changelog-0 of in-memory state store 
+KTABLE-SUPPRESS-STATE-STORE-0000000014
+[main] INFO org.apache.kafka.streams.processor.internals.StreamTask - stream-thread [main] task [0_0] Initialized
+[main] INFO cl.duoc.ventas.DedupeTransformer - dedupe activo store=eventos-procesados retencion=604800s purga=600s
+[main] INFO org.apache.kafka.streams.processor.internals.StreamTask - stream-thread [main] task [0_0] Restored and 
+ready to run
+[main] INFO org.apache.kafka.streams.state.internals.RocksDBTimestampedStore - Opening store 
+ventas-por-tienda.1767225600000 in regular mode
+[main] WARN cl.duoc.ventas.StreamsApp - evento enviado a DLQ topic=ventas-raw-dlq key=evt-1 {"reason":"TOTAL_INCONSISTE
+NTE","source_topic":"ventas-raw","key":"evt-1","event_id":"evt-1","original":"{\"eventId\":\"evt-1\",\"eventTime\":\"20
+26-01-01T00:00:10Z\",\"store\":\"Tienda A\",\"storeFormat\":\"tienda\",\"city\":\"Santiago\",\"channel\":\"presencial\"
+,\"category\":\"ropa\",\"product\":\"Polera\",\"quantity\":2,\"unitPriceClp\":1000,\"totalClp\":9999,\"customerId\":\"c
+liente-0001\",\"paymentMethod\":\"debito\"}","detected_at":"2026-11-23T02:33:06.549853400Z"}
+[main] INFO org.apache.kafka.streams.state.internals.RocksDBTimestampedStore - Opening store 
+ventas-por-tienda.1767225720000 in regular mode
+[main] INFO org.apache.kafka.streams.processor.internals.StreamTask - stream-thread [main] task [0_0] Suspended from 
+RUNNING
+[main] INFO org.apache.kafka.streams.processor.internals.RecordCollectorImpl - topology-test-driver Closing record 
+collector clean
+[main] INFO org.apache.kafka.streams.processor.internals.StreamTask - stream-thread [main] task [0_0] Closed clean
+[main] INFO org.apache.kafka.streams.processor.internals.StateDirectory - stream-thread [main] Deleting task directory 
+0_0 for 0_0 as user calling cleanup.
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.280 s -- in cl.duoc.ventas.TopologyDedupeTest
+[INFO] Running cl.duoc.ventas.TopologyDlqTest
+[main] INFO org.apache.kafka.streams.kstream.internals.KTableImpl - Using grace period of [PT30S] as the suppress 
+duration for node [KTABLE-SUPPRESS-0000000013].
+[main] WARN org.apache.kafka.streams.processor.internals.StateDirectory - Using an OS temp directory in the state.dir 
+property can cause failures with writing the checkpoint file due to the fact that this directory can be cleared by the 
+OS. Resolved state.dir: [C:\Users\rdmun\AppData\Local\Temp\kafka-streams-test3737459082414315784]
+[main] ERROR org.apache.kafka.streams.processor.internals.StateDirectory - Failed to change permissions for the 
+directory C:\Users\rdmun\AppData\Local\Temp\kafka-streams-test3737459082414315784
+[main] ERROR org.apache.kafka.streams.processor.internals.StateDirectory - Failed to change permissions for the 
+directory 
+C:\Users\rdmun\AppData\Local\Temp\kafka-streams-test3737459082414315784\test-6b4e139c-1244-4771-a573-90245130e9bb
+[main] INFO org.apache.kafka.streams.processor.internals.ProcessorStateManager - topology-test-driver State store 
+eventos-procesados did not find checkpoint offset, hence would default to the starting offset at changelog 
+test-6b4e139c-1244-4771-a573-90245130e9bb-eventos-procesados-changelog-0
+[main] INFO org.apache.kafka.streams.processor.internals.ProcessorStateManager - topology-test-driver State store 
+ventas-por-tienda did not find checkpoint offset, hence would default to the starting offset at changelog 
+test-6b4e139c-1244-4771-a573-90245130e9bb-ventas-por-tienda-changelog-0
+[main] INFO org.apache.kafka.streams.processor.internals.ProcessorStateManager - topology-test-driver Initializing to 
+the starting offset for changelog 
+test-6b4e139c-1244-4771-a573-90245130e9bb-KTABLE-SUPPRESS-STATE-STORE-0000000014-changelog-0 of in-memory state store 
+KTABLE-SUPPRESS-STATE-STORE-0000000014
+[main] INFO org.apache.kafka.streams.processor.internals.StreamTask - stream-thread [main] task [0_0] Initialized
+[main] INFO cl.duoc.ventas.DedupeTransformer - dedupe activo store=eventos-procesados retencion=604800s purga=600s
+[main] INFO org.apache.kafka.streams.processor.internals.StreamTask - stream-thread [main] task [0_0] Restored and 
+ready to run
+[main] INFO org.apache.kafka.streams.state.internals.RocksDBTimestampedStore - Opening store 
+ventas-por-tienda.1767225600000 in regular mode
+[main] WARN cl.duoc.ventas.StreamsApp - evento enviado a DLQ topic=ventas-raw-dlq key=evt-json {"reason":"JSON_INVALIDO
+","source_topic":"ventas-raw","key":"evt-json","event_id":null,"original":"{","detected_at":"2026-11-23T02:33:06.681115
+100Z"}
+[main] WARN cl.duoc.ventas.StreamsApp - evento enviado a DLQ topic=ventas-raw-dlq key=evt-missing {"reason":"CAMPO_OBLI
+GATORIO:quantity","source_topic":"ventas-raw","key":"evt-missing","event_id":"evt-missing","original":"{\"eventId\":\"e
+vt-missing\",\"eventTime\":\"2026-01-01T00:00:10Z\",\"store\":\"Tienda A\",\"storeFormat\":\"tienda\",\"city\":\"Santia
+go\",\"channel\":\"presencial\",\"category\":\"ropa\",\"product\":\"Polera\",\"unitPriceClp\":1000,\"totalClp\":1000,\"
+customerId\":\"cliente-0001\",\"paymentMethod\":\"debito\"}","detected_at":"2026-11-23T02:33:06.685114200Z"}
+[main] WARN cl.duoc.ventas.StreamsApp - evento enviado a DLQ topic=ventas-raw-dlq key=evt-total {"reason":"TOTAL_INCONS
+ISTENTE","source_topic":"ventas-raw","key":"evt-total","event_id":"evt-total","original":"{\"eventId\":\"evt-total\",\"
+eventTime\":\"2026-01-01T00:00:10Z\",\"store\":\"Tienda A\",\"storeFormat\":\"tienda\",\"city\":\"Santiago\",\"channel\
+":\"presencial\",\"category\":\"ropa\",\"product\":\"Polera\",\"quantity\":1,\"unitPriceClp\":1000,\"totalClp\":999,\"c
+ustomerId\":\"cliente-0001\",\"paymentMethod\":\"debito\"}","detected_at":"2026-11-23T02:33:06.690654100Z"}
+[main] INFO org.apache.kafka.streams.processor.internals.StreamTask - stream-thread [main] task [0_0] Suspended from 
+RUNNING
+[main] INFO org.apache.kafka.streams.processor.internals.RecordCollectorImpl - topology-test-driver Closing record 
+collector clean
+[main] INFO org.apache.kafka.streams.processor.internals.StreamTask - stream-thread [main] task [0_0] Closed clean
+[main] INFO org.apache.kafka.streams.processor.internals.StateDirectory - stream-thread [main] Deleting task directory 
+0_0 for 0_0 as user calling cleanup.
+[main] INFO org.apache.kafka.streams.kstream.internals.KTableImpl - Using grace period of [PT30S] as the suppress 
+duration for node [KTABLE-SUPPRESS-0000000013].
+[main] WARN org.apache.kafka.streams.processor.internals.StateDirectory - Using an OS temp directory in the state.dir 
+property can cause failures with writing the checkpoint file due to the fact that this directory can be cleared by the 
+OS. Resolved state.dir: [C:\Users\rdmun\AppData\Local\Temp\kafka-streams-test15657213726013835323]
+[main] ERROR org.apache.kafka.streams.processor.internals.StateDirectory - Failed to change permissions for the 
+directory C:\Users\rdmun\AppData\Local\Temp\kafka-streams-test15657213726013835323
+[main] ERROR org.apache.kafka.streams.processor.internals.StateDirectory - Failed to change permissions for the 
+directory 
+C:\Users\rdmun\AppData\Local\Temp\kafka-streams-test15657213726013835323\test-58fa6dbf-906a-41e9-a786-ca21c9c334fb
+[main] INFO org.apache.kafka.streams.processor.internals.ProcessorStateManager - topology-test-driver State store 
+eventos-procesados did not find checkpoint offset, hence would default to the starting offset at changelog 
+test-58fa6dbf-906a-41e9-a786-ca21c9c334fb-eventos-procesados-changelog-0
+[main] INFO org.apache.kafka.streams.processor.internals.ProcessorStateManager - topology-test-driver State store 
+ventas-por-tienda did not find checkpoint offset, hence would default to the starting offset at changelog 
+test-58fa6dbf-906a-41e9-a786-ca21c9c334fb-ventas-por-tienda-changelog-0
+[main] INFO org.apache.kafka.streams.processor.internals.ProcessorStateManager - topology-test-driver Initializing to 
+the starting offset for changelog 
+test-58fa6dbf-906a-41e9-a786-ca21c9c334fb-KTABLE-SUPPRESS-STATE-STORE-0000000014-changelog-0 of in-memory state store 
+KTABLE-SUPPRESS-STATE-STORE-0000000014
+[main] INFO org.apache.kafka.streams.processor.internals.StreamTask - stream-thread [main] task [0_0] Initialized
+[main] INFO cl.duoc.ventas.DedupeTransformer - dedupe activo store=eventos-procesados retencion=604800s purga=600s
+[main] INFO org.apache.kafka.streams.processor.internals.StreamTask - stream-thread [main] task [0_0] Restored and 
+ready to run
+[main] INFO org.apache.kafka.streams.state.internals.RocksDBTimestampedStore - Opening store 
+ventas-por-tienda.1767225600000 in regular mode
+[main] INFO org.apache.kafka.streams.processor.internals.StreamTask - stream-thread [main] task [0_0] Suspended from 
+RUNNING
+[main] INFO org.apache.kafka.streams.processor.internals.RecordCollectorImpl - topology-test-driver Closing record 
+collector clean
+[main] INFO org.apache.kafka.streams.processor.internals.StreamTask - stream-thread [main] task [0_0] Closed clean
+[main] INFO org.apache.kafka.streams.processor.internals.StateDirectory - stream-thread [main] Deleting task directory 
+0_0 for 0_0 as user calling cleanup.
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.166 s -- in cl.duoc.ventas.TopologyDlqTest
+[INFO] Running cl.duoc.ventas.TopologyLateEventTest
+[main] INFO org.apache.kafka.streams.kstream.internals.KTableImpl - Using grace period of [PT30S] as the suppress 
+duration for node [KTABLE-SUPPRESS-0000000013].
+[main] WARN org.apache.kafka.streams.processor.internals.StateDirectory - Using an OS temp directory in the state.dir 
+property can cause failures with writing the checkpoint file due to the fact that this directory can be cleared by the 
+OS. Resolved state.dir: [C:\Users\rdmun\AppData\Local\Temp\kafka-streams-test1908282714068413528]
+[main] ERROR org.apache.kafka.streams.processor.internals.StateDirectory - Failed to change permissions for the 
+directory C:\Users\rdmun\AppData\Local\Temp\kafka-streams-test1908282714068413528
+[main] ERROR org.apache.kafka.streams.processor.internals.StateDirectory - Failed to change permissions for the 
+directory 
+C:\Users\rdmun\AppData\Local\Temp\kafka-streams-test1908282714068413528\test-1e1003df-790a-4399-a4b4-16823da38909
+[main] INFO org.apache.kafka.streams.processor.internals.ProcessorStateManager - topology-test-driver State store 
+eventos-procesados did not find checkpoint offset, hence would default to the starting offset at changelog 
+test-1e1003df-790a-4399-a4b4-16823da38909-eventos-procesados-changelog-0
+[main] INFO org.apache.kafka.streams.processor.internals.ProcessorStateManager - topology-test-driver State store 
+ventas-por-tienda did not find checkpoint offset, hence would default to the starting offset at changelog 
+test-1e1003df-790a-4399-a4b4-16823da38909-ventas-por-tienda-changelog-0
+[main] INFO org.apache.kafka.streams.processor.internals.ProcessorStateManager - topology-test-driver Initializing to 
+the starting offset for changelog 
+test-1e1003df-790a-4399-a4b4-16823da38909-KTABLE-SUPPRESS-STATE-STORE-0000000014-changelog-0 of in-memory state store 
+KTABLE-SUPPRESS-STATE-STORE-0000000014
+[main] INFO org.apache.kafka.streams.processor.internals.StreamTask - stream-thread [main] task [0_0] Initialized
+[main] INFO cl.duoc.ventas.DedupeTransformer - dedupe activo store=eventos-procesados retencion=604800s purga=600s
+[main] INFO org.apache.kafka.streams.processor.internals.StreamTask - stream-thread [main] task [0_0] Restored and 
+ready to run
+[main] INFO org.apache.kafka.streams.state.internals.RocksDBTimestampedStore - Opening store 
+ventas-por-tienda.1767225720000 in regular mode
+[main] WARN org.apache.kafka.streams.kstream.internals.KStreamWindowAggregate - Skipping record for expired window. 
+topic=[test-1e1003df-790a-4399-a4b4-16823da38909-ventas-por-tienda-repartition] partition=[0] offset=[1] 
+timestamp=[1767225610000] window=[1767225600000,1767225660000) expiration=[1767225690000] streamTime=[1767225720000]
+[main] INFO org.apache.kafka.streams.processor.internals.StreamTask - stream-thread [main] task [0_0] Suspended from 
+RUNNING
+[main] INFO org.apache.kafka.streams.processor.internals.RecordCollectorImpl - topology-test-driver Closing record 
+collector clean
+[main] INFO org.apache.kafka.streams.processor.internals.StreamTask - stream-thread [main] task [0_0] Closed clean
+[main] INFO org.apache.kafka.streams.processor.internals.StateDirectory - stream-thread [main] Deleting task directory 
+0_0 for 0_0 as user calling cleanup.
+[main] INFO org.apache.kafka.streams.kstream.internals.KTableImpl - Using grace period of [PT30S] as the suppress 
+duration for node [KTABLE-SUPPRESS-0000000013].
+[main] WARN org.apache.kafka.streams.processor.internals.StateDirectory - Using an OS temp directory in the state.dir 
+property can cause failures with writing the checkpoint file due to the fact that this directory can be cleared by the 
+OS. Resolved state.dir: [C:\Users\rdmun\AppData\Local\Temp\kafka-streams-test16034580644816137505]
+[main] ERROR org.apache.kafka.streams.processor.internals.StateDirectory - Failed to change permissions for the 
+directory C:\Users\rdmun\AppData\Local\Temp\kafka-streams-test16034580644816137505
+[main] ERROR org.apache.kafka.streams.processor.internals.StateDirectory - Failed to change permissions for the 
+directory 
+C:\Users\rdmun\AppData\Local\Temp\kafka-streams-test16034580644816137505\test-9febaf70-9d69-44bb-8e84-94e6356b152e
+[main] INFO org.apache.kafka.streams.processor.internals.ProcessorStateManager - topology-test-driver State store 
+eventos-procesados did not find checkpoint offset, hence would default to the starting offset at changelog 
+test-9febaf70-9d69-44bb-8e84-94e6356b152e-eventos-procesados-changelog-0
+[main] INFO org.apache.kafka.streams.processor.internals.ProcessorStateManager - topology-test-driver State store 
+ventas-por-tienda did not find checkpoint offset, hence would default to the starting offset at changelog 
+test-9febaf70-9d69-44bb-8e84-94e6356b152e-ventas-por-tienda-changelog-0
+[main] INFO org.apache.kafka.streams.processor.internals.ProcessorStateManager - topology-test-driver Initializing to 
+the starting offset for changelog 
+test-9febaf70-9d69-44bb-8e84-94e6356b152e-KTABLE-SUPPRESS-STATE-STORE-0000000014-changelog-0 of in-memory state store 
+KTABLE-SUPPRESS-STATE-STORE-0000000014
+[main] INFO org.apache.kafka.streams.processor.internals.StreamTask - stream-thread [main] task [0_0] Initialized
+[main] INFO cl.duoc.ventas.DedupeTransformer - dedupe activo store=eventos-procesados retencion=604800s purga=600s
+[main] INFO org.apache.kafka.streams.processor.internals.StreamTask - stream-thread [main] task [0_0] Restored and 
+ready to run
+[main] INFO org.apache.kafka.streams.state.internals.RocksDBTimestampedStore - Opening store 
+ventas-por-tienda.1767225600000 in regular mode
+[main] INFO org.apache.kafka.streams.state.internals.RocksDBTimestampedStore - Opening store 
+ventas-por-tienda.1767225720000 in regular mode
+[main] INFO org.apache.kafka.streams.processor.internals.StreamTask - stream-thread [main] task [0_0] Suspended from 
+RUNNING
+[main] INFO org.apache.kafka.streams.processor.internals.RecordCollectorImpl - topology-test-driver Closing record 
+collector clean
+[main] INFO org.apache.kafka.streams.processor.internals.StreamTask - stream-thread [main] task [0_0] Closed clean
+[main] INFO org.apache.kafka.streams.processor.internals.StateDirectory - stream-thread [main] Deleting task directory 
+0_0 for 0_0 as user calling cleanup.
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.197 s -- in cl.duoc.ventas.TopologyLateEventTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.095 s
+[INFO] Finished at: 2026-11-22T23:33:07-03:00
+[INFO] ------------------------------------------------------------------------

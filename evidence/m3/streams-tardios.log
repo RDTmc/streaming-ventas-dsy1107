@@ -1,0 +1,1 @@
+﻿[ventas-aggregator-ddedf0de-3c3a-4f05-970c-3c98619de916-StreamThread-1] WARN org.apache.kafka.streams.kstream.internals.KStreamWindowAggregate - Skipping record for expired window. topic=[ventas-aggregator-ventas-por-tienda-repartition] partition=[0] offset=[3426] timestamp=[1795400092000] window=[1795400040000,1795400100000) expiration=[1795400247731] streamTime=[1795400277731]
